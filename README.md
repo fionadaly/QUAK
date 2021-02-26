@@ -17,20 +17,20 @@ This repository is the official implementation of [Quasi Anomalous Knowledge: Se
 
 ## Requirements
 
+I used conda to manage my dependencies.
+
 To install requirements:
 
 ```setup
-pip install -r requirements.txt
+conda env create -f environment.yml
 ```
-
->📋  Describe how to set up the environment, e.g. pip/conda/docker commands, download datasets, etc...
 
 ## Training
 
 To train the model(s) in the paper, run this command:
 
 ```train
-python train_script.py --input-data <path_to_data> --alpha 10 --beta 20
+python train_script.py
 ```
 
 >📋  Describe how to train the models, with example commands on how to train the models in your paper, including the full training procedure and appropriate hyperparameters.
