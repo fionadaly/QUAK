@@ -1,6 +1,8 @@
 # QUAK
 QUasi Anomalous Knowledge for Anomaly Detection and Tagging in High Energy Physics
 
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/08/Logo_for_Conference_on_Neural_Information_Processing_Systems.svg/1200px-Logo_for_Conference_on_Neural_Information_Processing_Systems.svg.png" width=200>
+
 # Quasi Anomalous Knowledge: Searching for new physics with embedded knowledge
 
 This repository is the official implementation of [Quasi Anomalous Knowledge: Searching for new physics with embedded knowledge](https://arxiv.org/abs/2011.03550). 
