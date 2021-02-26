@@ -11,10 +11,10 @@ This repository is the official implementation of [Quasi Anomalous Knowledge: Se
 
 <div class="row">
   <div class="column">
-    <img src="etc/quak-plot1.png" alt="Snow" style="width:100%">
+    <img src="etc/quak-plot1.png" alt="Snow" style="width:30%">
   </div>
   <div class="column">
-    <img src="etc/quak-plot2.png" alt="Forest" style="width:100%">
+    <img src="etc/quak-plot2.png" alt="Forest" style="width:30%">
   </div>
 </div> 
 
