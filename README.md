@@ -1,8 +1,8 @@
 # QUAK
 QUasi Anomalous Knowledge for Anomaly Detection and Tagging in High Energy Physics
 
-<p align="center">
-<img src="etc/quak-logo.jpg" height=350>
+<p align="leftr">
+<img src="etc/quak-logo.png" height=200>
 </p>
 
 # Quasi Anomalous Knowledge: Searching for new physics with embedded knowledge
