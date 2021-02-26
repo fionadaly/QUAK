@@ -1,7 +1,7 @@
 # QUAK
 QUasi Anomalous Knowledge for Anomaly Detection and Tagging in High Energy Physics
 
-<p align="leftr">
+<p align="left">
 <img src="etc/quak-logo.png" height=200>
 </p>
 
@@ -9,7 +9,13 @@ QUasi Anomalous Knowledge for Anomaly Detection and Tagging in High Energy Physi
 
 This repository is the official implementation of [Quasi Anomalous Knowledge: Searching for new physics with embedded knowledge](https://arxiv.org/abs/2011.03550). 
 
->📋  Optional: include a graphic explaining your approach/main result, bibtex entry, link to demos, blog posts and tutorials
+<p align="left">
+<img src="etc/quak-plot1.png" height=200>
+</p>
+
+<p align="center">
+<img src="etc/quak-plot2.png" height=200>
+</p>
 
 ## Requirements
 
