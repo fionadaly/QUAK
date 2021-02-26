@@ -43,8 +43,6 @@ python eval.py --model-file mymodel.pth --benchmark imagenet
 
 To evaluate QUAK performance on MNIST dataset, run:
 
->📋  Describe how to evaluate the trained models on benchmarks reported in the paper, give commands that produce the results (section below).
-
 ## Citation
 
 We are preparing a journal submission, in the meantime, please cite our paper from arxiv:
