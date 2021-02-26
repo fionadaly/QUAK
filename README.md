@@ -9,14 +9,11 @@ QUasi Anomalous Knowledge for Anomaly Detection and Tagging in High Energy Physi
 
 This repository is the official implementation of [Quasi Anomalous Knowledge: Searching for new physics with embedded knowledge](https://arxiv.org/abs/2011.03550). 
 
-<div class="row">
-  <div class="column">
-    <img src="etc/quak-plot1.png" alt="Snow" style="width:30%">
-  </div>
-  <div class="column">
-    <img src="etc/quak-plot2.png" alt="Forest" style="width:30%">
-  </div>
-</div> 
+<p float="left">
+  <img src="etc/quak-plot1.png" width="100" />
+  <img src="etc/quak-plot2.png" width="100" /> 
+</p>
+
 
 <p align="left">
 <img src="etc/quak-plot1.png" height=200>
