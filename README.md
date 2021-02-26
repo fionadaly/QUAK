@@ -22,20 +22,37 @@ pip install -r requirements.txt
 To train the model(s) in the paper, run this command:
 
 ```train
-python train.py --input-data <path_to_data> --alpha 10 --beta 20
+python train_script.py --input-data <path_to_data> --alpha 10 --beta 20
 ```
 
 >📋  Describe how to train the models, with example commands on how to train the models in your paper, including the full training procedure and appropriate hyperparameters.
 
 ## Evaluation
 
-To evaluate my model on ImageNet, run:
+To evaluate QUAK performance on LHCO dataset, run:
 
 ```eval
 python eval.py --model-file mymodel.pth --benchmark imagenet
 ```
 
+To evaluate QUAK performance on MNIST dataset, run:
+
 >📋  Describe how to evaluate the trained models on benchmarks reported in the paper, give commands that produce the results (section below).
+
+## Citation
+
+We are preparing a journal submission, in the meantime, please cite our paper from arxiv:
+
+@article{Park:2020pak,
+    author = "Park, Sang Eon and Rankin, Dylan and Udrescu, Silviu-Marian and Yunus, Mikaeel and Harris, Philip",
+    title = "{Quasi Anomalous Knowledge: Searching for new physics with embedded knowledge}",
+    eprint = "2011.03550",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ph",
+    month = "11",
+    year = "2020"
+}
+
 
 ## Pre-trained Models
 
