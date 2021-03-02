@@ -24,6 +24,21 @@ To install requirements:
 ```setup
 conda env create -f environment.yml
 ```
+## Datasets
+
+QUAK used LHC Olympics dataset curated by , please cite
+To read more about these datasets, please read this paper:
+
+We privately generated samples based on LHC Olympics dataset, the procedure of which is outlined in our paper:
+
+QUAK method is not limited to physics dataset; It can be applied to any environment where having vague knowledge of anomaly could help with the detection. 
+
+To test QUAK in a different setting, we tested it on MNIST (cite ) dataset. 
+
+
+
+
+
 
 ## Training
 
@@ -35,7 +50,7 @@ python train_script.py
 
 ## Evaluation
 
-To evaluate QUAK performance on LHCO dataset, run:
+To evaluate QUAK performance on LHC Olympics black box dataset, run:
 
 ```eval
 python eval.py --model-file mymodel.pth --benchmark imagenet
@@ -62,6 +77,7 @@ We are preparing a journal submission, in the meantime, please cite our paper fr
 
 You can download pretrained models here:
 
+- [My awesome model](https://drive.google.com/mymodel.pth) trained on ImageNet using parameters x,y,z. 
 - [My awesome model](https://drive.google.com/mymodel.pth) trained on ImageNet using parameters x,y,z. 
 
 
