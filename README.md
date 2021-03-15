@@ -26,19 +26,14 @@ conda env create -f environment.yml
 ```
 ## Datasets
 
-QUAK used LHC Olympics dataset curated by , please cite
-To read more about these datasets, please read this paper:
+QUAK used LHC Olympics dataset curated by  Kasieczka, Gregor; Nachman, Benjamin; Shih, David, please cite https://zenodo.org/record/4536624
+To read more about these datasets, please read LHC Olympics Community White Paper: https://arxiv.org/abs/2101.08320
 
-We privately generated samples based on LHC Olympics dataset, the procedure of which is outlined in our paper:
+We privately generated samples based on LHC Olympics dataset, the procedure of which is outlined in our paper: https://arxiv.org/abs/2011.03550
+For training and evaluation, we applied pre-processing procedure which leaves each event with jet masses and substructure variables.
 
 QUAK method is not limited to physics dataset; It can be applied to any environment where having vague knowledge of anomaly could help with the detection. 
-
-To test QUAK in a different setting, we tested it on MNIST (cite ) dataset. 
-
-
-
-
-
+To test QUAK in a different setting, we tested it on MNIST dataset (http://yann.lecun.com/exdb/mnist/). 
 
 ## Training
 
