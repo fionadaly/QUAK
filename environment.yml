@@ -1,4 +1,4 @@
-name: myenv
+name: quak
 channels:
   - conda-forge
   - defaults
@@ -16,8 +16,6 @@ dependencies:
   - backcall=0.1.0=py_0
   - beautifulsoup4=4.9.1=py36h9f0ad1d_0
   - binutils-meta=1.0.4=0
-  - binutils_impl_linux-64=2.34=h53a641e_5
-  - binutils_linux-64=2.34=hc952b39_20
   - blas=1.0=mkl
   - bleach=3.1.5=pyh9f0ad1d_0
   - blosc=1.19.0=he1b5a44_0
@@ -34,7 +32,6 @@ dependencies:
   - chardet=3.0.4=py36h9f0ad1d_1006
   - compilers=1.0.4=0
   - conda=4.8.3=py36h9f0ad1d_1
-  - conda-build=3.19.2=py36h9f0ad1d_0
   - conda-package-handling=1.6.0=py36h8c4c3a4_2
   - cryptography=2.9.2=py36h45558ae_0
   - cudatoolkit=10.0.130=0
@@ -57,12 +54,8 @@ dependencies:
   - fribidi=1.0.9=h516909a_0
   - ftgl=2.4.0=hc56bac0_0
   - gast=0.3.3=py_0
-  - gcc_impl_linux-64=7.5.0=hd420e75_6
-  - gcc_linux-64=7.5.0=h09487f9_20
   - gdk-pixbuf=2.38.2=h3f25603_4
   - gettext=0.19.8.1=hc5be6a0_1002
-  - gfortran_impl_linux-64=7.5.0=hdf63c60_6
-  - gfortran_linux-64=7.5.0=h09487f9_20
   - giflib=5.2.1=h516909a_2
   - git=2.26.0=pl526hf241897_0
   - gl2ps=1.4.0=he06d7ca_0
@@ -76,8 +69,6 @@ dependencies:
   - gsl=2.6=h294904e_0
   - gst-plugins-base=1.14.5=h0935bb2_2
   - gstreamer=1.14.5=h36ae1b5_2
-  - gxx_impl_linux-64=7.5.0=hdf63c60_6
-  - gxx_linux-64=7.5.0=h09487f9_20
   - h5py=2.10.0=nompi_py36h513d04c_102
   - harfbuzz=2.4.0=h9f30f68_3
   - hdf5=1.10.5=nompi_h3c11f04_1104
@@ -107,7 +98,6 @@ dependencies:
   - keras-preprocessing=1.1.0=py_0
   - kiwisolver=1.2.0=py36hdb11119_0
   - krb5=1.17.1=h2fd8d38_0
-  - ld_impl_linux-64=2.34=h53a641e_5
   - libarchive=3.3.3=hc47fbbf_1007
   - libblas=3.8.0=14_mkl
   - libcblas=3.8.0=14_mkl
@@ -120,7 +110,6 @@ dependencies:
   - libffi=3.2.1=he1b5a44_1007
   - libgcc=7.2.0=h69d50b8_2
   - libgcc-ng=9.2.0=h24d8f2e_2
-  - libgfortran-ng=7.5.0=hdf63c60_6
   - libglu=9.0.0=he1b5a44_1001
   - libgomp=9.2.0=h24d8f2e_2
   - libgpuarray=0.7.6=h14c3975_1003
@@ -133,7 +122,6 @@ dependencies:
   - librsvg=2.49.2=h33a7fed_0
   - libsodium=1.0.17=h516909a_0
   - libssh2=1.9.0=hab1572f_2
-  - libstdcxx-ng=9.2.0=hdf63c60_2
   - libtiff=4.1.0=hc7e4089_6
   - libtool=2.4.6=h14c3975_1002
   - libuuid=2.32.1=h14c3975_1000
@@ -218,7 +206,6 @@ dependencies:
   - root=6.20.2=py36h01bec7c_0
   - root-binaries=6.20.2=py36h01bec7c_0
   - root-dependencies=6.20.2=py36h01bec7c_0
-  - root_base=6.20.2=py36hae30160_0
   - ruamel_yaml=0.15.80=py36h8c4c3a4_1001
   - scikit-learn=0.22.2.post1=py36hcdab131_0
   - scipy=1.4.1=py36h2d22cac_3
@@ -236,7 +223,6 @@ dependencies:
   - termcolor=1.1.0=py_2
   - terminado=0.8.3=py36h9f0ad1d_1
   - testpath=0.4.4=py_0
-  - theano=1.0.4=py36he1b5a44_1001
   - tk=8.6.10=hed695b0_0
   - torchvision=0.4.2=cuda100py36hecfc37a_0
   - tornado=6.0.4=py36h8c4c3a4_1
