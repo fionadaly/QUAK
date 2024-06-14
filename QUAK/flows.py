@@ -8,6 +8,11 @@ import torch.nn.init as init
 import torch.nn.functional as F
 from utils import unconstrained_RQS
 
+if torch.cuda.is_available():
+    device = torch.device("cuda:0")
+else:
+    device = torch.device("cpu")
+
 # supported non-linearities: note that the function must be invertible
 functional_derivatives = {
     torch.tanh: lambda x: 1 - torch.pow(torch.tanh(x), 2),
@@ -16,6 +21,7 @@ functional_derivatives = {
     F.elu: lambda x: (x > 0).type(torch.FloatTensor) + \
                      (x < 0).type(torch.FloatTensor) * torch.exp(x)
 }
+
 
 
 class Planar(nn.Module):
@@ -195,11 +201,11 @@ class MAF(nn.Module):
         self.reset_parameters()
 
     def reset_parameters(self):
-        init.uniform_(self.initial_param, -math.sqrt(0.5), math.sqrt(0.5)).cuda()
+        init.uniform_(self.initial_param, -math.sqrt(0.5), math.sqrt(0.5)).to(device)
 
     def forward(self, x):
         z = torch.zeros_like(x)
-        log_det = torch.zeros(z.shape[0]).cuda()
+        log_det = torch.zeros(z.shape[0]).to(device)
         for i in range(self.dim):
             if i == 0:
                 mu, alpha = self.initial_param[0], self.initial_param[1]
@@ -212,7 +218,7 @@ class MAF(nn.Module):
 
     def inverse(self, z):
         x = torch.zeros_like(z)
-        log_det = torch.zeros(z.shape[0]).cuda()
+        log_det = torch.zeros(z.shape[0]).to(device)
         z = z.flip(dims=(1,))
         for i in range(self.dim):
             if i == 0:
@@ -306,7 +312,7 @@ class NSF_AR(nn.Module):
 
     def forward(self, x):
         z = torch.zeros_like(x)
-        log_det = torch.zeros(z.shape[0]).cuda()
+        log_det = torch.zeros(z.shape[0]).to(device)
         for i in range(self.dim):
             if i == 0:
                 init_param = self.init_param.expand(x.shape[0], 3 * self.K - 1)
@@ -324,7 +330,7 @@ class NSF_AR(nn.Module):
 
     def inverse(self, z):
         x = torch.zeros_like(z)
-        log_det = torch.zeros(x.shape[0]).cuda()
+        log_det = torch.zeros(x.shape[0]).to(device)
         for i in range(self.dim):
             if i == 0:
                 init_param = self.init_param.expand(x.shape[0], 3 * self.K - 1)
@@ -354,7 +360,7 @@ class NSF_CL(nn.Module):
         self.f2 = base_network(dim // 2, (3 * K - 1) * dim // 2, hidden_dim)
 
     def forward(self, x):
-        log_det = torch.zeros(x.shape[0]).cuda()
+        log_det = torch.zeros(x.shape[0]).to(device)
         lower, upper = x[:, :self.dim // 2], x[:, self.dim // 2:]
         out = self.f1(lower).reshape(-1, self.dim // 2, 3 * self.K - 1)
         W, H, D = torch.split(out, self.K, dim = 2)
@@ -375,7 +381,7 @@ class NSF_CL(nn.Module):
         return torch.cat([lower, upper], dim = 1), log_det
 
     def inverse(self, z):
-        log_det = torch.zeros(z.shape[0]).cuda()
+        log_det = torch.zeros(z.shape[0]).to(device)
         lower, upper = z[:, :self.dim // 2], z[:, self.dim // 2:]
         out = self.f2(upper).reshape(-1, self.dim // 2, 3 * self.K - 1)
         W, H, D = torch.split(out, self.K, dim = 2)

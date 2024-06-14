@@ -1,6 +1,10 @@
 import torch
 import torch.nn as nn
 
+if torch.cuda.is_available():
+    device = torch.device("cuda:0")
+else:
+    device = torch.device("cpu")
 
 class NormalizingFlowModel(nn.Module):
 
@@ -11,7 +15,7 @@ class NormalizingFlowModel(nn.Module):
 
     def forward(self, x):
         m, _ = x.shape
-        log_det = torch.zeros(m).cuda()
+        log_det = torch.zeros(m).to(device)
         for flow in self.flows:
             x, ld = flow.forward(x)
             log_det += ld
@@ -20,7 +24,7 @@ class NormalizingFlowModel(nn.Module):
 
     def inverse(self, z):
         m, _ = z.shape
-        log_det = torch.zeros(m).cuda()
+        log_det = torch.zeros(m).to(device)
         for flow in self.flows[::-1]:
             z, ld = flow.inverse(z)
             log_det += ld
