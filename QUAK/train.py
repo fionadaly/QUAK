@@ -11,6 +11,7 @@ import pandas as pd
 import torch.utils.data as utils
 import math
 import time
+import os
 import tqdm
 
 import torch
@@ -39,31 +40,37 @@ else:
 # Load and process the data
 
 # needs to be adopted for our data stream
+def load_normalize_to_tensor(folder_path, feature):
+    final_tensors = []
+    for file in os.scandir(folder_path):
+        data = np.load(file)
+        arr = data[feature]
+        Y = np.array(arr.tolist())
+        # print(Y.shape)
+        # print(Y.shape)
 
-def dataloader(f, feature):
-    data = np.load(f)
-    arr = data[feature]
-    Y = np.array(arr.tolist())
-    print(Y.shape)
+        # normalize
+        bkg_mean = []
+        bkg_std = []
 
-    # normalize
-    bkg_mean = []
-    bkg_std = []
+        for i in range(Y.shape[1]):
+            mean = np.mean(Y[:,i])
+            std = np.std(Y[:,i])
+            bkg_mean.append(mean)
+            bkg_std.append(std)
+            Y[:,i] = (Y[:,i]-mean)/std
+        
+        final_tensors.append(torch.tensor(Y))
+        # print(f"shape of Y is {torch.tensor(Y).shape}")
 
-    for i in range(Y.shape[1]):
-        mean = np.mean(Y[:,i])
-        std = np.std(Y[:,i])
-        bkg_mean.append(mean)
-        bkg_std.append(std)
-        Y[:,i] = (Y[:,i]-mean)/std
+    our_tensor = torch.vstack(final_tensors) #but this has 3 dimensions, MUST squeeze
+    return torch.squeeze(our_tensor)
 
-    total_PureBkg = torch.tensor(Y)
 
+def dataloader(folder_path, feature, shuffle = True):
+    total_PureBkg = load_normalize_to_tensor(folder_path, feature)
     bs = 800
-    bkgAE_train_iterator = utils.DataLoader(total_PureBkg, batch_size=bs, shuffle=True)
-    bkgAE_test_iterator = utils.DataLoader(total_PureBkg, batch_size=bs)
-
-    return bkgAE_train_iterator, bkgAE_test_iterator
+    return utils.DataLoader(total_PureBkg, batch_size=bs, shuffle=shuffle)
 
 
 
@@ -123,10 +130,12 @@ class VAE_NF(nn.Module):
 
 # Creating Training Routine
 
-def train(bkgAE_train_iterator):
+def train(bkgAE_train_iterator, model):
     global n_steps
     train_loss = []
     model.train()
+    optimizer = optim.Adam(model.parameters(), lr=lr)
+
 
     for batch_idx, x in enumerate(bkgAE_train_iterator):
         start_time = time.time()
@@ -164,7 +173,7 @@ def train(bkgAE_train_iterator):
 
 # Creating Evaluation Routine
 
-def evaluate(split='valid'):
+def evaluate(model, bkgAE_test_iterator, split='valid'):
     global n_steps
     start_time = time.time()
     val_loss = []
@@ -191,24 +200,13 @@ def evaluate(split='valid'):
     return np.asarray(val_loss).mean(0)
 
 
-if __name__ == '__main__':
-
-    version = 0
-    zdim = 4
-    nflow = 2
-    lr = 5e-3
-    beta = 0.1 
-
-    N_EPOCHS = 30
-    PRINT_INTERVAL = 400
-    NUM_WORKERS = 4
-    n_steps = 0
-
+def train_model(data_folder, output_file):
     features = 'jet'
     if features == 'jet':
         nfeats = 7
-
-    bkgAE_train_iterator, bkgAE_test_iterator = dataloader('QCD_HT1500to2000_part000.npz', 'jet')
+    
+    train_iterator = dataloader(data_folder + '/training', 'jet', shuffle = True)
+    validation_iterator = dataloader(data_folder + '/validation', 'jet', shuffle = False)
 
     model = VAE_NF(nflow, zdim, nfeats).to(device)
     ae_def = {
@@ -229,8 +227,8 @@ if __name__ == '__main__':
     PATIENCE_COUNT = 0
     for epoch in range(1, 1000):
         print("Epoch {}:".format(epoch))
-        train(bkgAE_train_iterator)
-        cur_loss = evaluate()
+        train(train_iterator, model)
+        cur_loss = evaluate(model, validation_iterator)
         print(cur_loss)
 
         if cur_loss <= BEST_LOSS:
@@ -238,7 +236,7 @@ if __name__ == '__main__':
             BEST_LOSS = cur_loss
             LAST_SAVED = epoch
             print("Saving model!")
-            torch.save(model.state_dict(),f"test.h5")
+            torch.save(model.state_dict(),output_file)
 
         else:
             PATIENCE_COUNT += 1
@@ -247,3 +245,21 @@ if __name__ == '__main__':
                 print(f"############Patience Limit Reached with LR={lr}, Best Loss={BEST_LOSS}")
                 break
 
+
+if __name__ == '__main__':
+    # global variables
+    version = 0
+    zdim = 4
+    nflow = 2
+    lr = 5e-3
+    beta = 0.1 
+
+    N_EPOCHS = 30
+    PRINT_INTERVAL = 400
+    NUM_WORKERS = 4
+    n_steps = 0
+
+    for file in os.scandir('Data'):
+        name = file.name
+        print(name)
+        train_model('Data/' + name, 'Models/' + name + '.h5')
