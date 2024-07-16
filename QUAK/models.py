@@ -36,3 +36,26 @@ class NormalizingFlowModel(nn.Module):
         x, _ = self.inverse(z)
         return x
 
+#latent space model
+class SimpleNN(nn.Module):
+    def __init__(self):
+        super(SimpleNN, self).__init__()
+
+        self.network = nn.Sequential(nn.Linear(3, 16),  # Input layer
+        nn.LeakyReLU(True),
+        nn.Linear(16, 16),  # Hidden layer
+        nn.LeakyReLU(True),
+        nn.Linear(16, 3)   
+        # nn.Softmax(dim=3)
+        # Output layer (3 categories)
+        )
+
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        x = torch.relu(self.fc2(x))
+        x = self.fc3(x)
+        return x
+
+    def reconstruction_loss(self, x, recon_x):
+        loss = nn.CrossEntropyLoss()
+        return loss(x, recon_x)
